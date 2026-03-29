@@ -11,12 +11,14 @@ function createDownloadLink(fileUrl, fileName, linkText) {
 
 // Add the download link to the page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    const downloadContainer = document.querySelector('ul');
-    if (downloadContainer && downloadContainer.dataset.file) {
-        const fileName = downloadContainer.dataset.file;
-        const downloadLink = createDownloadLink(fileName, fileName, 'Download ' + fileName);
-        const li = document.createElement('li');
-        li.appendChild(downloadLink);
-        downloadContainer.appendChild(li);
-    }
+    const downloadContainers = document.querySelectorAll('ul');
+    downloadContainers.forEach(container => {
+        if (container.dataset.file) {
+            const fileName = container.dataset.file;
+            const downloadLink = createDownloadLink(fileName, fileName, 'Download ' + fileName);
+            const li = document.createElement('li');
+            li.appendChild(downloadLink);
+            container.appendChild(li);
+        }
+    });
 });
